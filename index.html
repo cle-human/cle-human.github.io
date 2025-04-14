@@ -1,531 +1,529 @@
-<!DOCTYPE=html>
-<html lang="de">
+<!DOCTYPE html>
+<html>
 <head>
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>Clemens Hoffmann</title>
-	<style>
-	body {
-		font-family: Arial, sans-serif;
-		background-color: black;
-		margin: 0;
-		padding: 5%;
-		padding-top: 0%;
-		background-image: url('background.png'); 
-		background-repeat: no-repeat;
-		background-attachment: fixed;
-		background-size: 100% 100%;
-    }
-	.grid-container {
-		display: grid;
-		grid-template-columns: 15% 15% auto;
-		padding: 0px;
-		gap: 5px;
-	}
+<title>Page Title</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+* {
+  box-sizing: border-box;
+}
 
-	.grid-item {
-		background-color: rgba(255, 255, 255, 1);
-		padding: 20px;
-		font-size: 20px;
-		text-align: left;
-	}
-	.left {
-		text-align: center;
-		color: white;
-		writing-mode: vertical-lr;
-	}
-	.right {
-	}
-	.top{
-		background-color: rgba(0,0,0,0);
-	}
-	.topright{
-		background-color: rgba(0,0,0,0);
-	}
-	.tblock {
-		transform: rotate(180deg);
-		font-size: 30px
-	}
+/* Style the body */
+body {
+  font-family: Arial;
+  margin: 3%;
+  margin-top: 0%;
+  background-image: url('background.png'); 
+  background-repeat: no-repeat;
+	background-attachment: fixed;
+	background-size: 100% 100%;
+}
 
-	#grad1 {
-		background-image: linear-gradient(to right,rgba(0, 0, 0, 0), rgba(1, 1, 1, 0.75));
-	}
-	#grad2 {
-		background-image: linear-gradient(to right,rgba(1, 1, 1, 0.75), rgba(1, 1, 1, 1));
-	}
-	/* Dialog-Design */
-	.dialog {
-		display: none;
-		position: fixed;
-		top: 50%;
-		left: 50%;
-		transform: translate(-50%, -50%);
-		background-color: #ffffff;
-		padding: 20px;
-		border: 2px solid #000000;
-		border-radius: 8px;
-		box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
-		text-align: center;
-		z-index: 1000;
-		font-size: 20px;
-	}
+/* Header/logo Title */
+.header {
+  padding: 60px;
+  text-align: center;
+  color: white;
+}
 
-	.dialog-buttons {
-		margin-top: 10px;
+.language-switch {
+	float: right;
 	}
+.language-switch button {
+	padding: 5px 30px;
+	margin: 0px;
+	border: none;
+	border-radius: 5px;
+	background-color: rgba(0, 91, 179, 1);
+	color: white;
+	cursor: pointer;
+	font-size: 16px;
+}
+.language-switch button:hover {
+	background-color: rgba(0, 61, 150, 1);
+}
 
-	.dialog-buttons button#openUrlBtn {
-		font-size: 18px;
-		width: 100%;
-		margin: 0px;
-		padding: 8px 16px;
-		border: none;
-		border-radius: 4px;
-		background-color: #007BFF;
-		color: white;
-		cursor: pointer;
-		font-size: 16px;
-	}
-	.dialog-buttons button#openUrlBtn:hover {
-		background-color: #0056b3;
-	}	
-	.dialog-buttons button#copyUrlBtn {
-		font-size: 18px;
-		width: 100%;
-		margin: 0px;
-		padding: 8px 16px;
-		border: none;
-		border-radius: 4px;
-		background-color: #c0c1c2;
-		color: white;
-		cursor: pointer;
-		font-size: 16px;
-	}
-	.dialog-buttons button#copyUrlBtn:hover {
-		background-color: #747575;
-	}
-	.dialog-buttons button#closeBtn {
-		font-size: 18px;
-		width: 100%;
-		margin: 0px;
-		padding: 8px 16px;
-		border: none;
-		border-radius: 4px;
-		background-color: #c0c1c2;
-		color: white;
-		cursor: pointer;
-		font-size: 16px;
-	}
-	.dialog-buttons button#closeBtn:hover {
-		background-color: #747575;
-	}
-		.dialog-buttons button#openUrlBtn2 {
-		font-size: 18px;
-		width: 100%;
-		margin: 0px;
-		padding: 8px 16px;
-		border: none;
-		border-radius: 4px;
-		background-color: #007BFF;
-		color: white;
-		cursor: pointer;
-		font-size: 16px;
-	}
-	.dialog-buttons button#openUrlBtn2:hover {
-		background-color: #0056b3;
-	}	
-	.dialog-buttons button#copyUrlBtn2 {
-		font-size: 18px;
-		width: 100%;
-		margin: 0px;
-		padding: 8px 16px;
-		border: none;
-		border-radius: 4px;
-		background-color: #c0c1c2;
-		color: white;
-		cursor: pointer;
-		font-size: 16px;
-	}
-	.dialog-buttons button#copyUrlBtn2:hover {
-		background-color: #747575;
-	}
-	.dialog-buttons button#closeBtn2 {
-		font-size: 18px;
-		width: 100%;
-		margin: 0px;
-		padding: 8px 16px;
-		border: none;
-		border-radius: 4px;
-		background-color: #c0c1c2;
-		color: white;
-		cursor: pointer;
-		font-size: 16px;
-	}
-	.dialog-buttons button#closeBtn2:hover {
-		background-color: #747575;
-	}
-	.buttonbig {
-		padding: 6%;
-		font-size: 40px;
-		text-align: center;
-		border-radius: 8px;
-		background-color: rgba(0, 91, 179, 1);
-		color: white;
-	}
-	.buttonbig:hover {
-		background-color: rgba(0, 61, 150, 1);
-	}
-	.overlay {
-		display: none;
-		position: fixed;
-		top: 0;
-		left: 0;
-		width: 100%;
-		height: 100%;
-		background-color: rgba(0, 0, 0, 0.5); /* Halbtransparentes Schwarz */
-		z-index: 999; /* Überlagert die Seite, liegt aber unter dem Dialog */
-	}
-	.language-switch {
-		float: right;
-        }
-	.language-switch button {
-		padding: 5px 30px;
-		margin: 0px;
-		border: none;
-		border-radius: 5px;
-		background-color: rgba(0, 91, 179, 1);
-		color: white;
-		cursor: pointer;
-		font-size: 16px;
-	}
-	.language-switch button:hover {
-		background-color: rgba(0, 61, 150, 1);
-	}
-	.hidden {
-		display: none;
-	}
-	@media (max-width: 700px) {
-	
-		.grid-container {
-			display: grid;
-			grid-template-columns: auto;
-		}
-		.left {
-			height: 0px;
-		}
-		.right {
-			display: none;
-		}
-		.top {
-			display: none;
-		}
-		.tblock {
-			transform: rotate(270deg)
-		}
-    }
-	@media (min-width: 947px) {
-		.grid-container {
-			display: grid;
-			grid-template-columns: 142px 142px auto;
-		}
-	}
-	</style>
+/* Column container */
+.row {  
+  display: flex;
+  flex-wrap: wrap;
+}
+
+/* Create two unequal columns that sits next to each other */
+/* Sidebar/left column */
+.side {
+  flex: 1;
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: column;
+  margin-right: 10px;
+}
+
+.sidebox {
+  width: 100%;
+  padding: 30px;
+  margin: 5px;
+  margin-bottom: 5px;
+  background: white;
+}
+
+/* Main column */
+.main {
+  flex: 3;
+  margin-bottom: -5px;
+}
+
+.mainbox {
+  padding: 30px;
+  margin: 5px;
+  margin-bottom: 10px;
+  text-align: justify;
+  background: white;
+}
+
+.filler {
+  flex-grow: 1;
+  background: white;
+  width: 100%;
+  margin: 5px;
+  margin-bottom: 5px;
+}
+
+/* Dialog-Design */
+.dialog {
+	display: none;
+	position: fixed;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	background-color: #ffffff;
+	padding: 20px;
+	border: 2px solid #000000;
+	border-radius: 8px;
+	box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+	text-align: center;
+	z-index: 1000;
+	font-size: 20px;
+}
+
+.dialog-buttons {
+	margin-top: 10px;
+}
+
+.dialog-buttons button#openUrlBtn {
+	font-size: 18px;
+	width: 100%;
+	margin: 0px;
+	padding: 8px 16px;
+	border: none;
+	border-radius: 4px;
+	background-color: #007BFF;
+	color: white;
+	cursor: pointer;
+	font-size: 16px;
+}
+.dialog-buttons button#openUrlBtn:hover {
+	background-color: #0056b3;
+}	
+.dialog-buttons button#copyUrlBtn {
+	font-size: 18px;
+	width: 100%;
+	margin: 0px;
+	padding: 8px 16px;
+	border: none;
+	border-radius: 4px;
+	background-color: #c0c1c2;
+	color: white;
+	cursor: pointer;
+	font-size: 16px;
+}
+.dialog-buttons button#copyUrlBtn:hover {
+	background-color: #747575;
+}
+.dialog-buttons button#closeBtn {
+	font-size: 18px;
+	width: 100%;
+	margin: 0px;
+	padding: 8px 16px;
+	border: none;
+	border-radius: 4px;
+	background-color: #c0c1c2;
+	color: white;
+	cursor: pointer;
+	font-size: 16px;
+}
+.dialog-buttons button#closeBtn:hover {
+	background-color: #747575;
+}
+.dialog-buttons button#openUrlBtn2 {
+	font-size: 18px;
+	width: 100%;
+	margin: 0px;
+	padding: 8px 16px;
+	border: none;
+	border-radius: 4px;
+	background-color: #007BFF;
+	color: white;
+	cursor: pointer;
+	font-size: 16px;
+}
+.dialog-buttons button#openUrlBtn2:hover {
+	background-color: #0056b3;
+}	
+.dialog-buttons button#copyUrlBtn2 {
+	font-size: 18px;
+	width: 100%;
+	margin: 0px;
+	padding: 8px 16px;
+	border: none;
+	border-radius: 4px;
+	background-color: #c0c1c2;
+	color: white;
+	cursor: pointer;
+	font-size: 16px;
+}
+.dialog-buttons button#copyUrlBtn2:hover {
+	background-color: #747575;
+}
+.dialog-buttons button#closeBtn2 {
+	font-size: 18px;
+	width: 100%;
+	margin: 0px;
+	padding: 8px 16px;
+	border: none;
+	border-radius: 4px;
+	background-color: #c0c1c2;
+	color: white;
+	cursor: pointer;
+	font-size: 16px;
+}
+.dialog-buttons button#closeBtn2:hover {
+	background-color: #747575;
+}
+.buttonbig {
+	padding: 20px;
+	font-size: 30px;
+	text-align: center;
+	border-radius: 8px;
+	background-color: rgba(0, 91, 179, 1);
+	color: white;
+	max-width: 700px;
+	margin: auto;
+}
+.buttonbig:hover {
+	background-color: rgba(0, 61, 150, 1);
+}
+.overlay {
+	display: none;
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background-color: rgba(0, 0, 0, 0.5); /* Halbtransparentes Schwarz */
+	z-index: 999; /* Überlagert die Seite, liegt aber unter dem Dialog */
+}
+
+ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  background-color: #333;
+  display: flex;
+  justify-content: center; /* Center-aligns all elements */
+}
+
+li {
+  display: inline; /* Ensures items stay in one line */
+}
+
+li a {
+  display: block;
+  color: white;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+}
+
+li a:hover:not(.active) {
+  background-color: #111;
+}
+
+.hidden {
+	display: none;
+}
+
+/* Responsive layout - when the screen is less than 700px wide, make the two columns stack on top of each other instead of next to each other */
+@media screen and (max-width: 1000px) {
+  .row {   
+    flex-direction: column;
+  }
+  .buttonbig {
+	font-size: 20px;
+  }
+}
+</style>
 </head>
 <body>
-	<div id="de">
-	<div class="grid-container">
-		<div class="grid-item top"></div>
-		<div class="grid-item top"></div>
-		<div class="grid-item topright">
-			<p class="language-switch">
-				<button onclick="switchLanguage('de')">Deutsch</button>
-				<button onclick="switchLanguage('en')">English</button>
-			</p>
-		</div>
-		<div class="grid-item right" id="grad1"></div>
-		<div class="grid-item left" id="grad2"></div>
-		<div class="grid-item">
-			<h1>Willkommen!</h1>
-			<p>Dies ist eine Website über meine Arbeit und mich, Clemens Hoffmann. Bei Fragen nehmen Sie gern Kontakt mit mir auf.</p>
-		</div>
-		<div class="grid-item right" id="grad1"></div>
-		<div class="grid-item left" id="grad2">
-			<p class="tblock">Arbeitsfeld</p>
-		</div>
-		<div class="grid-item">
-			<h2>Europäisches Wahlrecht</h2>
-			<p>Als europäischer Föderalist setze ich mich für die weitere Demokratisierung der EU ein. Ich habe dabei verstärkt mit dem europäischen Wahlrecht auseinandergesetzt und einen Weg gefunden, wie eine Reform auch ohne Einstimmigkeit im Rat umgesetzt werden kann. </p>
-			<p>Der Ansatz basiert auf dem <a href="https://www.math.uni-augsburg.de/htdocs/emeriti/pukelsheim/publikationen.html">Tandemsystem von Jo Leinen und Prof. Pukelsheim</a>. Bei diesem bilden die Mitgliedsparteien einer europäischen Partei bzw. einer Fraktion des Europäischen Parlaments eine transnationale Listenverbindung. Wie viele Sitze diese Listenverbindung erhält basiert allein auf deren Stimmanteil auf europäischer Ebene. Die Sitze der Listenverbindung werden anschließend auf die Mitlgiedsparteien aufgeteilt, dabei bleiben die Sitzkontingente der Mitgliedstaaten unangetastet.</p>
-			<p>Das Tandemsystem kann modifiziert werden, sodass bei der Verteilung der Sitze der Listenverbindungen auf die Mitgliedstaaten Opt-outs gewährt werden können. Das heißt manche Mitgliedstaaten verteilen ihre Sitze wie gehabt, während die sich beteiligenden Mitgliedstaaten dafür sorgen, dass die Listenverbindungen die richtige Anzahl an Mandaten bekommen. Ich spreche deswegen von einem partiellen Tandemsystem.</p>
-			<p>Dieses partielle Tandemsystem ist entsprechend nicht auf die Mitarbeit aller Mitgliedstaaten angewiesen. Es kann daher auch ohnen sie über einen zwischenstaatlichen Zusatzvertrag oder den Mechanismus der verstärkten Zusammenarbeit eingeführt werden.</p>
-			<p>Das partielle Tandemsystem ist auch Teil der <a href="https://www.jef.de/dokumente/fuer-europawahlen-nach-dem-partiellen-tandemsystem-unser-plan-b-fuer-eine-europaeische-wahlrechtsreform/">Beschlusslage der JEF Deutschland</a> und Sie können <a href="https://www.foederalist.eu/2024/03/clemens-hoffmann-partielles-tandemwahlrecht.html?m=1">einen Artikel auf dem Blog "Der (europäische) Föderalist"</a> finden.</p>
-			<p>Die Sitzverteilung mit dem Tandemsystem führt zu unterschiedlichen Ergebnisse, je nachdem ob beispielsweise Sperrhürden eingeführt werden oder Diversitätsregeln für die Listenverbindungen bestehen. Mit dem folgenden Online-Rechner können verschiedene Varianten ausprobiert werden.</p>
-			<div class="buttonbig" onclick="showDialog()">Online-Rechner Tandemsystem</div>
-		</div>
-		<div class="grid-item right" id="grad1"></div>
-		<div class="grid-item left" id="grad2">
-			<p class="tblock">Arbeitsfeld</p>
-		</div>
-		<div class="grid-item">
-			<h2>Zeitreihenmodelle</h2>
-			<p>Im Zuge meiner Promotion arbeite ich zu den Effekte von Datenaggregation auf die Analyse von Preistransmissionsprozessen. Dabei nutze ich Fehlerkorrekturmodelle und schaue, wie sich diese verändern, wenn die Datenfrequenz sinkt, z.B. von täglich zu wöchentlich, oder was passiert, wenn mehrere Zeitreihen zusammengelegt werden, z.B. lokale Preise zu einen nationalen Durchschnittspreis.</p>
-			<p>Zeitliche Aggregation wurde bereits von <a href="https://scholar.google.com/scholar_url?url=https://www.tandfonline.com/doi/pdf/10.1080/07350015.1999.10524802&hl=de&sa=T&oi=gsb-gga&ct=res&cd=0&d=16713670553548100538&ei=eHBEZ93IDfzNy9YP2N7HqAo&scisig=AFWwaeadciv-3Q-sZUaIvW7FDX4a">Marcellino</a> und <a href="https://scholar.google.com/scholar?hl=de&as_sdt=0%2C5&q=L%C3%BCtkepohl%2C+Helmut+%281987%29.+Forecasting+aggregated+vector+ARMA+processes.+Vol.+284.+Springer+Science+%26+Business+Media.&btnG=">Lütkepohl</a> untersucht. Es zeigen sich zahlreiche Probleme beim arbeiten mit zeitlich aggregierten Zeitreihen. So kann zeitliche Aggregation Granger-Kausalität hervorrufen, d.h. wenn bei zwei Preisen ein Preis von den vergangenen Werten beider Zeitreihen abhängt, während der andere nur von seinen eigenen tut, wird man mit aggregierten Daten diese Beziehungen nicht wiederfinden. Stattdessen werden beide Preise von allen vergangenen Werten abhängen. Das Einzige, was unverändert bleibt, ist die Langfristbeziehung der Preise. Dies sind in einem Fehlerkorrekturmodell die Kointegrationsvektoren. Grundsätzlich ist es abzuraten, mit zeitlich aggregierten Daten zu arbeiten, wenn die geschätzten Kurzfristparameter im Mittelpunkt der Analyse stehen.</p>
-			<p>Räumliche Aggregation oder verwandte Formen, die die Anzahl der Variablen in einem Zeitreihenmodell reduzieren, ist weniger erforscht. Das einfache Weglassen von Variablen hat kaum Effekte auf das restliche Fehlerkorrekturmodell. Langfristbeziehungen, in denen die weggelassene Variable nicht vorkommt, bleiben unverändert. Erfolgt die Aggregation über Durchschnitte, so entsprechen analog die Parameter der Langfristbeziehung den Durchschnittsweten. insgesamt scheint aber die räumliche Aggregation wenig problematisch, weil häufig Effekte entstehen, die sich gegenseitig aufheben.</p>
-			<p>Lineare Transformationen wie die betrachteten Aggregationen erzeugen stets autokorrelierte Fehlerterme. Die aggregierten Prozesse müssen deswegen als ECVARMA Modelle geschätzt werden. Schätzfunktionen als auch Aggregationsfunktionen können in meinen R package gefunden werden. <a href="https://github.com/cle-human/ECVARMA">Hier kommen Sie zu Github, wo Sie den Code runterladen können.</a></p>
-			<p>Abseits der Aggregation habe ich mich auch mit einem Smooth transitioning model auseinander gesetzt. In einen Projekt für die Weltbank haben mein Betreuer, eine Mitdoktorandin, unser Ansprechpartner bei der Weltbank und ich sich genauer angesehen, was mit einer Vielzahl an Getreidepreisen passiert, wenn die Weltmarktpreise durch die Decke gehen. Wir haben festgestellt, dass es zu einer zunehemender Isolation der Märkte kommt und der internationale Handel eingeschränkt ist, was sich negativ auf die Ernährungssicherheit ärmerer Bevölkerungsschichten auswirken kann.</p>
-			<h4>Konferenzbeiträge</h4>
-			<p><a href="NCCC-134_2023 paper.pdf" download>Hoffmann, C., & von Cramon-Taubadel, S. (2023). The Effects of Temporal Data Aggregation on Price Transmission Analysis. Vortrag gehalten auf der NCCC-134: Conference on Applied 
-Commodity Price Analysis, Forecasting, and Market Risk Management. St. Louis, 24.-25. April 2023. </p>
-			<p><a href="IAAE paper.pdf" download>Hoffmann, C., Kastens, L., Portugal-Perez, A., & von Cramon-Taubadel, S. (2024). Trade policies and the transmission of international to domestic prices. Vortrag gehalten auf International Conference of Agricultural Economists. New Delhi, 2.-8. August 2024 </a></p>
-		</div>
-		<div class="grid-item right" id="grad1"></div>
-		<div class="grid-item left" id="grad2">
-			<p class="tblock">Über&nbsp;mich</p>
-		</div>
-		<div class="grid-item">
-			<h2>Lebenslauf</h2>
-			<ul style="list-style-type:none;">
-			<li>Geboren 1995</li>
-			<li>Abitur 2013 am Dr.-Frank-Gymnasium Staßfurt</li>
-			<li>2014-2017 Bachelorstudium der Agrarwissenschaften an der Georg-August-Universität Göttingen</li>
-			<li>2017-2020 Masterstudium der Agrarwissenschaften an der Georg-August-Universität Göttingen</li>
-			<li>2019-2020 Sachbearbeiter im Ministerium für Umwelt, Landwirtschaft und Energie des Landes Sachsen-Anhalt</li>
-			<li>2020-     Doktorant am Lehrstuhl für Agrarpolitik an der Georg-August-Universität Göttingen</li>
-			<p></p>
-			<li>2017-     Mitgliedschaft bei der JEF Göttingen/Europa-Union Göttingen</li>
-			</ul>
-		</div>
-		<div class="grid-item right" id="grad1"></div>
-		<div class="grid-item left" id="grad2">
-			<p class="tblock">Kontakt</p>
-		</div>
-		<div class="grid-item">
-			<h2>Email</h2>
-			<p>Schreiben Sie mir gern eine Email an: </p>
-			<img src="Unbenannt.png">
-		</div>
-		<div class="grid-item right" id="grad1"></div>
-		<div class="grid-item left" id="grad2">
-			<p class="tblock">Impressum</p>
-		</div>
-		<div class="grid-item">
-			<p>Clemens Hoffmann</p>
-			<p>An der Lutter 32</p>
-			<p>37075 Göttingen</p>
-		</div>
-		<div class="grid-item right" id="grad1"></div>
-		<div class="grid-item left" id="grad2">
-			<p class="tblock">Datenschutz</p>
-		</div>
-		<div class="grid-item">
-			<p>Diese Website wird mit Github pages gehostet. Ich, Clemens Hoffmann, erhebe selbst keine Daten und habe keinen Zugriff auf Ihre persönlichen Daten. Github speichert Ihre IP-Adresse zu Sicherheitszwecken. Die Datenschutzrichtlinien von Github finden Sie hier: <a href="https://docs.github.com/de/site-policy/privacy-policies/github-privacy-statement">https://docs.github.com/de/site-policy/privacy-policies/github-privacy-statement</a>.</p>
-		</div>
-	</div>
-	<div id="overlay" class="overlay"></div>
-	<!-- Dialogfenster -->
-	
-	<div id="dialog" class="dialog">
-		<h1>Online-Rechner</h1>
-		<p>Hinweis: Der Online-Rechner benötigt <b style="color: red">1-2&nbsp;Minuten Ladezeit</b> und läuft flüssiger in Chrome oder Edge. Die Ansicht funktioniert auch auf mobilen Endgeräten.</p>
-		<div class="dialog-buttons">
-			<p><button class="buttonstart" id="openUrlBtn">Starte den Rechner</button></p>
-			<p><button class="buttonother" id="copyUrlBtn">Kopiere den Link</button></p>
-			<p><button class="buttonother" id="closeBtn">Schließen</button></p>
-		</div>
-	</div>
-	</div>
-	<!--English-->
-	<div id="en" class="hidden">
-	<div class="grid-container">
-		<div class="grid-item top"></div>
-		<div class="grid-item top"></div>
-		<div class="grid-item topright">
-			<p class="language-switch">
-				<button onclick="switchLanguage('de')">Deutsch</button>
-				<button onclick="switchLanguage('en')">English</button>
-			</p>
-		</div>
-		<div class="grid-item right" id="grad1"></div>
-		<div class="grid-item left" id="grad2"></div>
-		<div class="grid-item">
-			<h1>Welcome!</h1>
-			<p>This a website about my work and about me, Clemens Hoffmann. If you have any questions, please contact me.</p>
-		</div>
-		<div class="grid-item right" id="grad1"></div>
-		<div class="grid-item left" id="grad2">
-			<p class="tblock">Project</p>
-		</div>
-		<div class="grid-item">
-			<h2>European Electoral System</h2>
-			<p>As a European federalist, I advocate for the further democratization of the EU. In this context, I have focused extensively on the European electoral system and devised a way to implement reform without requiring unanimity in the Council.</p>
-			<p>The approach is based on the <a href="https://www.math.uni-augsburg.de/htdocs/emeriti/pukelsheim/publikationen.html">Tandem System proposed by Jo Leinen and Prof. Pukelsheim</a>. In this system, the member parties of a European political party or a faction of the European Parliament form a transnational list coalition. The number of seats allocated to this list coalition is determined solely by its share of votes at the European level. These seats are then distributed among the member parties, leaving the seat quotas of individual member states unaffected.</p>
-			<p>The Tandem System can be modified so that opt-outs are allowed in distributing the list coalition’s seats to the member states. This means some member states distribute their seats as usual, while the participating member states ensure that the list coalitions receive the correct number of mandates. For this reason, I refer to it as a partial Tandem System.</p>
-			<p>This partial Tandem System does not rely on the participation of all member states. It can therefore be introduced via an intergovernmental supplementary treaty or the mechanism of enhanced cooperation without requiring the involvement of every member state.</p>
-			<p>The partial Tandem System is also part of the <a href="https://www.jef.de/dokumente/fuer-europawahlen-nach-dem-partiellen-tandemsystem-unser-plan-b-fuer-eine-europaeische-wahlrechtsreform/">resolutions of JEF Germany</a>, and you can find <a href="https://www.foederalist.eu/2024/03/clemens-hoffmann-partial-tandem-system.html">an English article on the blog "Der (europäische) Föderalist"</a>.</p>
-			<p>The seat distribution under the Tandem System leads to different outcomes depending on whether, for example, electoral thresholds are introduced or diversity rules for the list coalitions are applied. With the following online calculator, you can test various scenarios.</p>
+<!-- Navigation Bar -->
+<p class="language-switch">
+	<button onclick="switchLanguage('de')">Deutsch</button>
+	<button onclick="switchLanguage('en')">English</button>
+</p>
+<div id="de">
+<!-- Header -->
+<div class="header">
+  <h1>Willkommen!</h1>
+  <h>Dies ist eine Website über meine Arbeit und mich, Clemens Hoffmann. Bei Fragen nehmen Sie gern Kontakt mit mir auf.</p>
+</div>
 
-			<div class="buttonbig" onclick="showDialog2()">Web App: Tandem System</div>
-		</div>
-		<div class="grid-item right" id="grad1"></div>
-		<div class="grid-item left" id="grad2">
-			<p class="tblock">Project</p>
-		</div>
-		<div class="grid-item">
-			<h2>Time Series Models</h2>
-			<p>As part of my doctoral research, I investigate the effects of data aggregation on the analysis of price transmission processes. I use error correction models and examine how they change when data frequency decreases, e.g., from daily to weekly, or when multiple time series are merged, e.g., local prices aggregated into a national average price.</p>
-			<p>Temporal aggregation has been previously studied by <a href="https://scholar.google.com/scholar_url?url=https://www.tandfonline.com/doi/pdf/10.1080/07350015.1999.10524802&hl=de&sa=T&oi=gsb-gga&ct=res&cd=0&d=16713670553548100538&ei=eHBEZ93IDfzNy9YP2N7HqAo&scisig=AFWwaeadciv-3Q-sZUaIvW7FDX4a">Marcellino</a> and <a href="https://scholar.google.com/scholar?hl=de&as_sdt=0%2C5&q=L%C3%BCtkepohl%2C+Helmut+%281987%29.+Forecasting+aggregated+vector+ARMA+processes.+Vol.+284.+Springer+Science+%26+Business+Media.&btnG=">Lütkepohl</a>. Numerous issues arise when working with temporally aggregated time series. For instance, temporal aggregation can induce Granger causality: if two prices exist where one depends on the past values of both series while the other depends only on its own, this relationship is lost in aggregated data. Instead, both prices will appear to depend on all past values. The only component that remains unchanged is the long-term relationship between prices. In error correction models, these are the cointegration vectors. In general, it is not advisable to work with temporally aggregated data when the focus is on estimating short-term parameters.</p>
-			<p>Spatial aggregation or similar methods that reduce the number of variables in a time series model are less explored. Simply omitting variables has little effect on the remaining error correction model. Long-term relationships not involving the omitted variable remain unchanged. When aggregation is done via averages, the long-term relationship parameters correspond to average values. Overall, spatial aggregation appears less problematic, often resulting in offsetting effects.</p>
-			<p>Linear transformations like the aggregations considered here always produce autocorrelated error terms. Aggregated processes must therefore be estimated as ECVARMA models. Estimation functions and aggregation functions can be found in my R package. Visit my <a href="https://github.com/cle-human/ECVARMA">GitHub page</a> to download the code.</p>
-			<p>Beyond aggregation, I have also worked with a smooth transitioning model. In a project for the World Bank, my advisor, a fellow PhD student, our World Bank contact, and I analyzed the behavior of various grain prices when world market prices skyrocketed. We found that markets become increasingly isolated, and international trade is restricted, which can negatively impact food security for poorer populations.</p>
-			<h4>Conference Contributions</h4>
-			<p><a href="NCCC-134_2023 paper.pdf" download>Hoffmann, C., & von Cramon-Taubadel, S. (2023). The Effects of Temporal Data Aggregation on Price Transmission Analysis. Presented at the NCCC-134: Conference on Applied 
-Commodity Price Analysis, Forecasting, and Market Risk Management. St. Louis, 24.-25. April 2023. </p>
-			<p><a href="IAAE paper.pdf" download>Hoffmann, C., Kastens, L., Portugal-Perez, A., & von Cramon-Taubadel, S. (2024). Trade policies and the transmission of international to domestic prices. Presented at the International Conference of Agricultural Economists. New Delhi, 2.-8. August 2024 </a></p>
-		</div>
-		<div class="grid-item right" id="grad1"></div>
-		<div class="grid-item left" id="grad2">
-			<p class="tblock">About&nbsp;me</p>
-		</div>
-		<div class="grid-item">
-			<h2>CV</h2>
-			<ul style="list-style-type:none;">
-			<li>Born 1995</li>
-			<li>2013 A-levels at the Dr.-Frank-Gymnasium Staßfurt</li>
-			<li>2014-2017 Bachelor's studies of agricultural sciences at the University of Göttingen</li>
-			<li>2017-2020 Master's studies of agricultural sciences at the University of Göttingen</li>
-			<li>2019-2020 Clerk at the Ministry for the Environment, Agriculture and Energy of the state of Saxony-Anhalt</li>
-			<li>2020-     PhD student at the Chair of Agricultural Policy at the University of Göttingen</li>
-			<p></p>
-			<li>2017-     Member of the JEF Göttingen/Europa-Union Göttingen</li>
-			</ul>
-		</div>
-		<div class="grid-item right" id="grad1"></div>
-		<div class="grid-item left" id="grad2">
-			<p class="tblock">Contact</p>
-		</div>
-		<div class="grid-item">
-			<h2>Email</h2>
-			<p>Write me an email to: </p>
-			<img src="Unbenannt.png">
-		</div>
-		<div class="grid-item right" id="grad1"></div>
-		<div class="grid-item left" id="grad2">
-			<p class="tblock">Imprint</p>
-		</div>
-		<div class="grid-item">
-			<p>Clemens Hoffmann</p>
-			<p>An der Lutter 32</p>
-			<p>37075 Göttingen</p>
-		</div>
-		<div class="grid-item right" id="grad1"></div>
-		<div class="grid-item left" id="grad2">
-			<p class="tblock">Data privacy</p>
-		</div>
-		<div class="grid-item">
-			<p>This website is hosted with Github pages. I, Clemens Hoffmann, don't collect any data and don't have access to your personal data. Github stores your IP for security reasons. The privacy policies of Github can be found here: <a href="https://docs.github.com/de/site-policy/privacy-policies/github-privacy-statement">https://docs.github.com/de/site-policy/privacy-policies/github-privacy-statement</a>.</p>
-		</div>
+
+<!-- The flexible grid (content) -->
+<div class="row">
+  <div class="main">
+	<div class="mainbox">
+    <h1>Europäisches Wahlrecht</h1>
+    <p>Als europäischer Föderalist setze ich mich für die weitere Demokratisierung der EU ein. Ich habe dabei verstärkt mit dem europäischen Wahlrecht auseinandergesetzt und einen Weg gefunden, wie eine Reform auch ohne Einstimmigkeit im Rat umgesetzt werden kann.</p>
+    <img src="IMG_2073.jpg" style="width: 100%; min-height: 170px; max-height: 320px; object-fit: cover">
+	<p>Der Ansatz basiert auf dem <a href="https://www.math.uni-augsburg.de/htdocs/emeriti/pukelsheim/publikationen.html">Tandemsystem von Jo Leinen und Prof. Pukelsheim</a>. Bei diesem bilden die Mitgliedsparteien einer europäischen Partei bzw. einer Fraktion des Europäischen Parlaments eine transnationale Listenverbindung. Wie viele Sitze diese Listenverbindung erhält basiert allein auf deren Stimmanteil auf europäischer Ebene. Die Sitze der Listenverbindung werden anschließend auf die Mitlgiedsparteien aufgeteilt, dabei bleiben die Sitzkontingente der Mitgliedstaaten unangetastet.</p>
+	<p>Das Tandemsystem kann modifiziert werden, sodass bei der Verteilung der Sitze der Listenverbindungen auf die Mitgliedstaaten Opt-outs gewährt werden können. Das heißt manche Mitgliedstaaten verteilen ihre Sitze wie gehabt, während die sich beteiligenden Mitgliedstaaten dafür sorgen, dass die Listenverbindungen die richtige Anzahl an Mandaten bekommen. Ich spreche deswegen von einem partiellen Tandemsystem.</p>
+	<p>Dieses partielle Tandemsystem ist entsprechend nicht auf die Mitarbeit aller Mitgliedstaaten angewiesen. Es kann daher auch ohnen sie über einen zwischenstaatlichen Zusatzvertrag oder den Mechanismus der verstärkten Zusammenarbeit eingeführt werden.</p>
+	<p>Das partielle Tandemsystem ist auch Teil der <a href="https://www.jef.de/dokumente/fuer-europawahlen-nach-dem-partiellen-tandemsystem-unser-plan-b-fuer-eine-europaeische-wahlrechtsreform/">Beschlusslage der JEF Deutschland</a> und Sie können <a href="https://www.foederalist.eu/2024/03/clemens-hoffmann-partielles-tandemwahlrecht.html?m=1">einen Artikel auf dem Blog "Der (europäische) Föderalist"</a> finden.</p>
+	<p>Die Sitzverteilung mit dem Tandemsystem führt zu unterschiedlichen Ergebnisse, je nachdem ob beispielsweise Sperrhürden eingeführt werden oder Diversitätsregeln für die Listenverbindungen bestehen. Mit dem folgenden Online-Rechner können verschiedene Varianten ausprobiert werden.</p>
+	<div class="buttonbig" onclick="showDialog()">Online-Rechner Tandemsystem</div>
 	</div>
-	<div id="overlay" class="overlay"></div>
-	<!-- Dialogfenster -->
-	
-	<div id="dialog2" class="dialog">
-		<h1>Web App: Partial Tandem</h1>
-		<p>Note the web app needs <b style="color: red">1-2&nbsp;minutes to load</b> and runs better in Chrome or Edge. The usage with mobile devices is possible.</p>
-		<div class="dialog-buttons">
-			<p><button class="buttonstart" id="openUrlBtn2">Start the App</button></p>
-			<p><button class="buttonother" id="copyUrlBtn2">Copy the link</button></p>
-			<p><button class="buttonother" id="closeBtn2">Close</button></p>
-		</div>
+    
+	<div class="mainbox">
+    <h1>Zeitreihenmodelle</h1>
+		<p>Im Zuge meiner Promotion arbeite ich zu den Effekte von Datenaggregation auf die Analyse von Preistransmissionsprozessen. Dabei nutze ich Fehlerkorrekturmodelle und schaue, wie sich diese verändern, wenn die Datenfrequenz sinkt, z.B. von täglich zu wöchentlich, oder was passiert, wenn mehrere Zeitreihen zusammengelegt werden, z.B. lokale Preise zu einen nationalen Durchschnittspreis.</p>
+    <img src="Rplot.png" style="width: 100%; min-height: 170px; max-height: 320px">
+	<p>Zeitliche Aggregation wurde bereits von <a href="https://scholar.google.com/scholar_url?url=https://www.tandfonline.com/doi/pdf/10.1080/07350015.1999.10524802&hl=de&sa=T&oi=gsb-gga&ct=res&cd=0&d=16713670553548100538&ei=eHBEZ93IDfzNy9YP2N7HqAo&scisig=AFWwaeadciv-3Q-sZUaIvW7FDX4a">Marcellino</a> und <a href="https://scholar.google.com/scholar?hl=de&as_sdt=0%2C5&q=L%C3%BCtkepohl%2C+Helmut+%281987%29.+Forecasting+aggregated+vector+ARMA+processes.+Vol.+284.+Springer+Science+%26+Business+Media.&btnG=">Lütkepohl</a> untersucht. Es zeigen sich zahlreiche Probleme beim arbeiten mit zeitlich aggregierten Zeitreihen. So kann zeitliche Aggregation Granger-Kausalität hervorrufen, d.h. wenn bei zwei Preisen ein Preis von den vergangenen Werten beider Zeitreihen abhängt, während der andere nur von seinen eigenen tut, wird man mit aggregierten Daten diese Beziehungen nicht wiederfinden. Stattdessen werden beide Preise von allen vergangenen Werten abhängen. Das Einzige, was unverändert bleibt, ist die Langfristbeziehung der Preise. Dies sind in einem Fehlerkorrekturmodell die Kointegrationsvektoren. Grundsätzlich ist es abzuraten, mit zeitlich aggregierten Daten zu arbeiten, wenn die geschätzten Kurzfristparameter im Mittelpunkt der Analyse stehen.</p>
+	<p>Räumliche Aggregation oder verwandte Formen, die die Anzahl der Variablen in einem Zeitreihenmodell reduzieren, ist weniger erforscht. Das einfache Weglassen von Variablen hat kaum Effekte auf das restliche Fehlerkorrekturmodell. Langfristbeziehungen, in denen die weggelassene Variable nicht vorkommt, bleiben unverändert. Erfolgt die Aggregation über Durchschnitte, so entsprechen analog die Parameter der Langfristbeziehung den Durchschnittswerten. Insgesamt scheint aber die räumliche Aggregation wenig problematisch, weil häufig Effekte entstehen, die sich gegenseitig aufheben.</p>
+	<p>Lineare Transformationen wie die betrachteten Aggregationen erzeugen stets autokorrelierte Fehlerterme. Die aggregierten Prozesse müssen deswegen als ECVARMA Modelle geschätzt werden. Schätzfunktionen als auch Aggregationsfunktionen können in meinen R package gefunden werden. <a href="https://github.com/cle-human/ECVARMA">Hier kommen Sie zu Github, wo Sie den Code runterladen können.</a></p>
+	<p>Abseits der Aggregation habe ich mich auch mit einem Smooth transitioning model auseinander gesetzt. In einen Projekt für die Weltbank haben mein Betreuer, eine Mitdoktorandin, unser Ansprechpartner bei der Weltbank und ich sich genauer angesehen, was mit einer Vielzahl an Getreidepreisen passiert, wenn die Weltmarktpreise durch die Decke gehen. Wir haben festgestellt, dass es zu einer zunehemender Isolation der Märkte kommt und der internationale Handel eingeschränkt ist, was sich negativ auf die Ernährungssicherheit ärmerer Bevölkerungsschichten auswirken kann.</p>
+	<h4>Konferenzbeiträge</h4>
+	<p><a href="NCCC-134_2023 paper.pdf" download>Hoffmann, C., & von Cramon-Taubadel, S. (2023). The Effects of Temporal Data Aggregation on Price Transmission Analysis. Vortrag gehalten auf der NCCC-134: Conference on Applied 
+Commodity Price Analysis, Forecasting, and Market Risk Management. St. Louis, 24.-25. April 2023.</a> </p>
+	<p><a href="IAAE paper.pdf" download>Hoffmann, C., Kastens, L., Portugal-Perez, A., & von Cramon-Taubadel, S. (2024). Trade policies and the transmission of international to domestic prices. Vortrag gehalten auf International Conference of Agricultural Economists. New Delhi, 2.-8. August 2024 </a></p>
+	</div>
+  </div>
+   <div class="side">
+	<div class="sidebox">
+    <h2>Über&nbsp;mich</h2>
+	<img src="IMG_2064.jpg" style="width: 100%; max-width: 450px">
+    <h2>Lebenslauf</h2>
+	<p>Geboren 1995</p>
+	<p>Abitur 2013 am Dr.-Frank-Gymnasium Staßfurt</p>
+	<p>2014-2017 Bachelorstudium der Agrarwissenschaften an der Georg-August-Universität Göttingen</p>
+	<p>2017-     Mitgliedschaft bei der JEF Göttingen/Europa-Union Göttingen</p>
+	<p>2017-2020 Masterstudium der Agrarwissenschaften an der Georg-August-Universität Göttingen</p>
+	<p>2019-2020 Sachbearbeiter im Ministerium für Umwelt, Landwirtschaft und Energie des Landes Sachsen-Anhalt</p>
+	<p>2020-     Doktorant am Lehrstuhl für Agrarpolitik an der Georg-August-Universität Göttingen</p>
 	</div>
 	
+	<div class="sidebox">
+    <h3>Kontakt</h3>
+	<p>Schreiben Sie mir gern eine Email an: </p>
+	<img src="Unbenannt.png">
 	</div>
 	
+	<div class="sidebox">
+    <h3>Impressum</h3>
+	<p>Clemens Hoffmann</p>
+	<p>An der Lutter 32</p>
+	<p>37075 Göttingen</p>
+	</div>
+	<div class="sidebox">
+	<h3>Datenschutz</h3>
+	<p style="text-align: justify">Diese Website wird mit Github pages gehostet. Ich, Clemens Hoffmann, erhebe selbst keine Daten und habe keinen Zugriff auf Ihre persönlichen Daten. Github speichert Ihre IP-Adresse zu Sicherheitszwecken. Die Datenschutzrichtlinien von Github finden Sie hier: <a href="https://docs.github.com/de/site-policy/privacy-policies/github-privacy-statement">https://docs.github.com/de/site-policy/privacy-policies/github-privacy-statement</a>.</p>
+	</div>
+	<div class="filler"></div>
+  </div>
 
-	
+</div>
 
-	<script>
-	// URL, die verwendet wird
-	const url = "https://www.choffmann.eu/PartialTandem/app.html"; 
+<div id="overlay" class="overlay"></div>
+<!-- Dialogfenster -->
 
-	// Funktion, um das Dialogfenster anzuzeigen
-	function showDialog() {
-		const dialog = document.getElementById("dialog");
-		const overlay = document.getElementById("overlay");
-		dialog.style.display = "block";
-		overlay.style.display = "block";
-	}
+<div id="dialog" class="dialog">
+	<h1>Online-Rechner</h1>
+	<p>Hinweis: Der Online-Rechner benötigt <b style="color: red">1-2&nbsp;Minuten Ladezeit</b> und läuft flüssiger in Chrome oder Edge. Die Ansicht funktioniert auch auf mobilen Endgeräten.</p>
+	<div class="dialog-buttons">
+		<p><button class="buttonstart" id="openUrlBtn">Starte den Rechner</button></p>
+		<p><button class="buttonother" id="copyUrlBtn">Kopiere den Link</button></p>
+		<p><button class="buttonother" id="closeBtn">Schließen</button></p>
+	</div>
+</div>
+</div>
+<div id="en" class="hidden">
+<!-- Header -->
+<div class="header">
+  <h1>Welcome!</h1>
+  <p>This a website about my work and about me, Clemens Hoffmann. If you have any questions, please contact me.</p>
+</div>
 
-	// Funktion, um das Dialogfenster zu schließen
-	function closeDialog() {
-		const dialog = document.getElementById("dialog");
-		const overlay = document.getElementById("overlay");
-		dialog.style.display = "none";
-		overlay.style.display = "none";
-	}
 
-	// Event-Listener für Buttons
-	document.getElementById("openUrlBtn").addEventListener("click", () => {
-		window.open(url, "_blank");
+<!-- The flexible grid (content) -->
+<div class="row">
+  <div class="main">
+	<div class="mainbox">
+    <h1>European Electoral System</h1>
+	<p>As a European federalist, I advocate for the further democratization of the EU. In this context, I have focused extensively on the European electoral system and devised a way to implement reform without requiring unanimity in the Council.</p>
+    <img src="IMG_2073.jpg" style="width: 100%; min-height: 170px; max-height: 320px; object-fit: cover">
+	<p>The approach is based on the <a href="https://www.math.uni-augsburg.de/htdocs/emeriti/pukelsheim/publikationen.html">Tandem System proposed by Jo Leinen and Prof. Pukelsheim</a>. In this system, the member parties of a European political party or a faction of the European Parliament form a transnational list coalition. The number of seats allocated to this list coalition is determined solely by its share of votes at the European level. These seats are then distributed among the member parties, leaving the seat quotas of individual member states unaffected.</p>
+	<p>The Tandem System can be modified so that opt-outs are allowed in distributing the list coalition’s seats to the member states. This means some member states distribute their seats as usual, while the participating member states ensure that the list coalitions receive the correct number of mandates. For this reason, I refer to it as a partial Tandem System.</p>
+	<p>This partial Tandem System does not rely on the participation of all member states. It can therefore be introduced via an intergovernmental supplementary treaty or the mechanism of enhanced cooperation without requiring the involvement of every member state.</p>
+	<p>Transnational lists can also be combined with the Tandem System. This is even possible with the partial system, where the member parties of a list coalition can start their lists with candidates from the transnational list. Upon successful election, candidates from the transnational list would thus receive “national” seats. An additional rule ensures that these are distributed evenly across the countries.</p>
+	<p>The partial Tandem System is also part of the <a href="https://www.jef.de/dokumente/fuer-europawahlen-nach-dem-partiellen-tandemsystem-unser-plan-b-fuer-eine-europaeische-wahlrechtsreform/">resolutions of JEF Germany</a>, and you can find <a href="https://www.foederalist.eu/2024/03/clemens-hoffmann-partial-tandem-system.html">an English article on the blog "Der (europäische) Föderalist"</a>.</p>
+	<p>The seat distribution under the Tandem System leads to different outcomes depending on whether, for example, electoral thresholds are introduced or diversity rules for the list coalitions are applied. With the following online calculator, you can test various scenarios.</p>
+
+	<div class="buttonbig" onclick="showDialog2()">Web App: Tandem System</div>
+	</div>
+
+	<div class="mainbox">
+    <h1>Time Series Models</h1>
+	<p>As part of my doctoral research, I investigate the effects of data aggregation on the analysis of price transmission processes. I use error correction models and examine how they change when data frequency decreases, e.g., from daily to weekly, or when multiple time series are merged, e.g., local prices aggregated into a national average price.</p>
+    <img src="Rplot.png" style="width: 100%; min-height: 170px; max-height: 320px">
+	<p>Temporal aggregation has been previously studied by <a href="https://scholar.google.com/scholar_url?url=https://www.tandfonline.com/doi/pdf/10.1080/07350015.1999.10524802&hl=de&sa=T&oi=gsb-gga&ct=res&cd=0&d=16713670553548100538&ei=eHBEZ93IDfzNy9YP2N7HqAo&scisig=AFWwaeadciv-3Q-sZUaIvW7FDX4a">Marcellino</a> and <a href="https://scholar.google.com/scholar?hl=de&as_sdt=0%2C5&q=L%C3%BCtkepohl%2C+Helmut+%281987%29.+Forecasting+aggregated+vector+ARMA+processes.+Vol.+284.+Springer+Science+%26+Business+Media.&btnG=">Lütkepohl</a>. Numerous issues arise when working with temporally aggregated time series. For instance, temporal aggregation can induce Granger causality: if two prices exist where one depends on the past values of both series while the other depends only on its own, this relationship is lost in aggregated data. Instead, both prices will appear to depend on all past values. The only component that remains unchanged is the long-term relationship between prices. In error correction models, these are the cointegration vectors. In general, it is not advisable to work with temporally aggregated data when the focus is on estimating short-term parameters.</p>
+	<p>Spatial aggregation or similar methods that reduce the number of variables in a time series model are less explored. Simply omitting variables has little effect on the remaining error correction model. Long-term relationships not involving the omitted variable remain unchanged. When aggregation is done via averages, the long-term relationship parameters correspond to average values. Overall, spatial aggregation appears less problematic, often resulting in offsetting effects.</p>
+	<p>Linear transformations like the aggregations considered here always produce autocorrelated error terms. Aggregated processes must therefore be estimated as ECVARMA models. Estimation functions and aggregation functions can be found in my R package. Visit my <a href="https://github.com/cle-human/ECVARMA">GitHub</a> page to download the code.</p>
+	<p>Beyond aggregation, I have also worked with a smooth transitioning model. In a project for the World Bank, my advisor, a fellow PhD student, our World Bank contact, and I analyzed the behavior of various grain prices when world market prices skyrocketed. We found that markets become increasingly isolated, and international trade is restricted, which can negatively impact food security for poorer populations.</p>
+	<h4>Conference Contributions</h4>
+	<p><a href="NCCC-134_2023 paper.pdf" download>Hoffmann, C., & von Cramon-Taubadel, S. (2023). The Effects of Temporal Data Aggregation on Price Transmission Analysis. Presented at the NCCC-134: Conference on Applied
+Commodity Price Analysis, Forecasting, and Market Risk Management. St. Louis, 24.-25. April 2023. </a></p>
+	<p><a href="https://ageconsearch.umn.edu/record/344313/files/21207.pdf">Hoffmann, C., Kastens, L., Portugal-Perez, A., & von Cramon-Taubadel, S. (2024). Trade policies and the transmission of international to domestic prices. Presented at the International Conference of Agricultural Economists. New Delhi, 2.-8. August 2024 </a></p>
+	</div>
+  </div>
+   <div class="side">
+	<div class="sidebox">
+    <h2>About&nbsp;me</h2>
+	<img src="IMG_2064.jpg" style="width: 100%; max-width: 450px">
+    <h2>CV</h2>
+	<p>Born 1995</p>
+	<p>2013 A-levels at the Dr.-Frank-Gymnasium Staßfurt</p>
+	<p>2014-2017 Bachelor's studies of agricultural sciences at the University of Göttingen</p>
+	<p>2017-     Member of the JEF Göttingen/Europa-Union Göttingen</p>
+	<p>2017-2020 Master's studies of agricultural sciences at the University of Göttingen</p>
+	<p>2019-2020 Clerk at the Ministry for the Environment, Agriculture and Energy of the state of Saxony-Anhalt</p>
+	<p>2020-     PhD student at the Chair of Agricultural Policy at the University of Göttingen</p>
+	</div>
+
+	<div class="sidebox">
+    <h3>Contact</h3>
+	<p>Write me an email to: </p>
+	<img src="Unbenannt.png">
+	</div>
+
+	<div class="sidebox">
+    <h3>Imprint</h3>
+	<p>Clemens Hoffmann</p>
+	<p>An der Lutter 32</p>
+	<p>37075 Göttingen</p>
+	</div>
+	<div class="sidebox">
+	<h3>Data privacy</h3>
+	<p style="text-align: justify">This website is hosted with Github pages. I, Clemens Hoffmann, don't collect any data and don't have access to your personal data. Github stores your IP for security reasons. The privacy policies of Github can be found here: <a href="https://docs.github.com/de/site-policy/privacy-policies/github-privacy-statement">https://docs.github.com/de/site-policy/privacy-policies/github-privacy-statement</a>.</p>
+	</div>
+	<div class="filler"></div>
+
+  </div>
+</div>
+
+<div id="overlay" class="overlay"></div>
+<!-- Dialogfenster -->
+
+<div id="dialog2" class="dialog">
+	<h1>Web App: Partial Tandem</h1>
+	<p>Note the web app needs <b style="color: red">1-2&nbsp;minutes to load</b> and runs better in Chrome or Edge. The usage with mobile devices is possible.</p>
+	<div class="dialog-buttons">
+		<p><button class="buttonstart" id="openUrlBtn2">Start the App</button></p>
+		<p><button class="buttonother" id="copyUrlBtn2">Copy the link</button></p>
+		<p><button class="buttonother" id="closeBtn2">Close</button></p>
+	</div>
+</div>
+</div>
+<script>
+// URL, die verwendet wird
+const url = "https://www.choffmann.eu/PartialTandem/app.html"; 
+
+// Funktion, um das Dialogfenster anzuzeigen
+function showDialog() {
+	const dialog = document.getElementById("dialog");
+	const overlay = document.getElementById("overlay");
+	dialog.style.display = "block";
+	overlay.style.display = "block";
+}
+
+// Funktion, um das Dialogfenster zu schließen
+function closeDialog() {
+	const dialog = document.getElementById("dialog");
+	const overlay = document.getElementById("overlay");
+	dialog.style.display = "none";
+	overlay.style.display = "none";
+}
+
+// Event-Listener für Buttons
+document.getElementById("openUrlBtn").addEventListener("click", () => {
+	window.open(url, "_blank");
+	closeDialog();
+});
+
+document.getElementById("copyUrlBtn").addEventListener("click", () => {
+	navigator.clipboard.writeText(url).then(() => {
+		alert("URL wurde in die Zwischenablage kopiert!");
+	});
+	closeDialog();
+});
+document.getElementById("closeBtn").addEventListener("click", () => {
+	closeDialog();
+});
+
+// Funktion, um das Dialogfenster anzuzeigen
+function showDialog2() {
+	const dialog = document.getElementById("dialog2");
+	const overlay = document.getElementById("overlay");
+	dialog.style.display = "block";
+	overlay.style.display = "block";
+}
+
+// Funktion, um das Dialogfenster zu schließen
+function closeDialog2() {
+	const dialog = document.getElementById("dialog2");
+	const overlay = document.getElementById("overlay");
+	dialog.style.display = "none";
+	overlay.style.display = "none";
+}
+
+// Event-Listener für Buttons
+document.getElementById("openUrlBtn2").addEventListener("click", () => {
+	window.open(url, "_blank");
+	closeDialog2();
+});
+
+document.getElementById("copyUrlBtn2").addEventListener("click", () => {
+	navigator.clipboard.writeText(url).then(() => {
+		alert("URL has been copied to clipboard!");
+	});
+	closeDialog2();
+});
+document.getElementById("closeBtn2").addEventListener("click", () => {
+	closeDialog2();
+});
+// Optional: Funktion zum Schließen durch Klick außerhalb des Fensters
+window.addEventListener("click", (event) => {
+	const dialog = document.getElementById("dialog");
+	if (event.target === dialog) {
 		closeDialog();
-	});
-
-	document.getElementById("copyUrlBtn").addEventListener("click", () => {
-		navigator.clipboard.writeText(url).then(() => {
-			alert("URL wurde in die Zwischenablage kopiert!");
-		});
-		closeDialog();
-	});
-	document.getElementById("closeBtn").addEventListener("click", () => {
-		closeDialog();
-	});
-	
-		// Funktion, um das Dialogfenster anzuzeigen
-	function showDialog2() {
-		const dialog = document.getElementById("dialog2");
-		const overlay = document.getElementById("overlay");
-		dialog.style.display = "block";
-		overlay.style.display = "block";
 	}
+});
 
-	// Funktion, um das Dialogfenster zu schließen
-	function closeDialog2() {
-		const dialog = document.getElementById("dialog2");
-		const overlay = document.getElementById("overlay");
-		dialog.style.display = "none";
-		overlay.style.display = "none";
-	}
+function switchLanguage(lang) {
+	document.getElementById('de').classList.add('hidden');
+	document.getElementById('en').classList.add('hidden');
+	document.getElementById(lang).classList.remove('hidden');
+}
 
-	// Event-Listener für Buttons
-	document.getElementById("openUrlBtn2").addEventListener("click", () => {
-		window.open(url, "_blank");
-		closeDialog2();
-	});
-
-	document.getElementById("copyUrlBtn2").addEventListener("click", () => {
-		navigator.clipboard.writeText(url).then(() => {
-			alert("URL wurde in die Zwischenablage kopiert!");
-		});
-		closeDialog2();
-	});
-	document.getElementById("closeBtn2").addEventListener("click", () => {
-		closeDialog2();
-	});
-	// Optional: Funktion zum Schließen durch Klick außerhalb des Fensters
-	window.addEventListener("click", (event) => {
-		const dialog = document.getElementById("dialog");
-		if (event.target === dialog) {
-			closeDialog();
-		}
-	});
-	
-	function switchLanguage(lang) {
-		document.getElementById('de').classList.add('hidden');
-		document.getElementById('en').classList.add('hidden');
-		document.getElementById(lang).classList.remove('hidden');
-	}
-
-	</script>
-
+</script>
 </body>
 </html>
-
